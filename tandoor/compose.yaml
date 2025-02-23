@@ -3,7 +3,7 @@ services:
     image: postgres:16-alpine
     restart: always
     volumes:
-      - ./postgresql:/var/lib/postgresql/data
+      - /volume1/docker/tandoor/postgresql:/var/lib/postgresql/data
 
   web_recipes:
     image: vabene1111/recipes
@@ -11,8 +11,8 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./staticfiles:/opt/recipes/staticfiles
-      - ./mediafiles:/opt/recipes/mediafiles
+      - /volume1/docker/tandoor/staticfiles:/opt/recipes/staticfiles
+      - /volume1/docker/tandoor/mediafiles:/opt/recipes/mediafiles
     depends_on:
       - db_recipes
 
