@@ -1,0 +1,21 @@
+services:
+  db_recipes:
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+
+  web_recipes:
+    image: vabene1111/recipes
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env
+    volumes:
+      - staticfiles:/opt/recipes/staticfiles
+      - nginx_config:/opt/recipes/nginx/conf.d
+      - ./mediafiles:/opt/recipes/mediafiles
+    depends_on:
+      - db_recipes
+
